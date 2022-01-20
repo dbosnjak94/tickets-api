@@ -14,6 +14,7 @@ export class TicketService implements ITicketService {
         starting_point,
         end_point,
         time_of_departure,
+        time_of_arrival,
         price,
         available_number_of_tickets,
       } = req.body;
@@ -23,6 +24,7 @@ export class TicketService implements ITicketService {
         starting_point,
         end_point,
         time_of_departure,
+        time_of_arrival,
         price,
         available_number_of_tickets,
       });
@@ -76,6 +78,7 @@ export class TicketService implements ITicketService {
         starting_point,
         end_point,
         time_of_departure,
+        time_of_arrival,
         price,
         available_number_of_tickets,
         id_ticket,
@@ -86,6 +89,7 @@ export class TicketService implements ITicketService {
         starting_point,
         end_point,
         time_of_departure,
+        time_of_arrival,
         price,
         available_number_of_tickets,
         id_ticket,
