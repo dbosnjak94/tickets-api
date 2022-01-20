@@ -16,15 +16,19 @@ export interface IUserController {
     next: NextFunction
   ): Promise<{}>;
   ticketPurchase(req: Request, res: Response, next: NextFunction): Promise<{}>;
+  ticketCancel(req: Request, res: Response, next: NextFunction): Promise<{}>;
 }
 
 export interface IUserService {
   getAllUserTickets(req: Request, res: Response): Promise<ListOfTicketInfosDto>;
   ticketPurchase(req: Request, res: Response): Promise<PurchasedTicketDto>;
+  ticketCancel(req: Request, res: Response): Promise<PurchasedTicketDto>;
 }
 
 export interface IUserRepository {
   getAllUserTickets(id_user): Promise<ITicketInfo[]>;
   ticketPurchase(userTicket: IUserTicket): Promise<IPurchasedTicket>;
+  ticketCancel(id_purchase): Promise<boolean>;
   getUserByID(id_user): Promise<IUser>;
+  getPurchasedTicketByPurchaseID(id_purchase): Promise<IPurchasedTicket>;
 }

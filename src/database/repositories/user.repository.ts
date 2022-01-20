@@ -7,6 +7,7 @@ export class UserRepository implements IUserRepository {
   async getAllUserTickets(id_user): Promise<ITicketInfo[]> {
     const result: any[] = await connection.query(
       `SELECT 
+            id_purchase,
             concat(first_name," ", last_name) as owner, 
             starting_point, 
             end_point,
@@ -59,6 +60,36 @@ export class UserRepository implements IUserRepository {
               INNER JOIN ticket ON user_ticket.id_ticket=ticket.id_ticket
               WHERE user_ticket.id_purchase = ?;`,
       purchasedTicket.id_purchase
+    );
+
+    return result[0];
+  }
+
+  async ticketCancel(id_purchase): Promise<boolean> {
+    const result: any[] = await connection.query(
+      `DELETE FROM user_ticket WHERE id_purchase = ?;`,
+      id_purchase
+    );
+
+    return result[0].affectedRows === 0 ? false : true;
+  }
+
+  async getPurchasedTicketByPurchaseID(id_purchase): Promise<IPurchasedTicket> {
+    const result: any[] = await connection.query(
+      `SELECT 
+            concat(first_name," ", last_name) as owner, 
+            starting_point, 
+            end_point,
+            time_of_departure,
+            time_of_arrival,
+            price,
+            available_number_of_tickets,
+            datetime_of_purchase
+              FROM user_ticket
+              INNER JOIN user ON user_ticket.id_user=user.id_user
+              INNER JOIN ticket ON user_ticket.id_ticket=ticket.id_ticket
+              WHERE user_ticket.id_purchase = ?;`,
+      id_purchase
     );
 
     return result[0];

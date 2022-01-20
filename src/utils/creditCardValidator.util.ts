@@ -10,7 +10,7 @@ export const creditCardValidatorUtil = async (
 
     if (credit_card_no.toString().length !== 16) {
       return res.send({
-        message: "Card number not valid",
+        message: "Card number is not valid",
       });
     }
     return next();

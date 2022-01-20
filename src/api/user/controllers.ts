@@ -41,4 +41,17 @@ export class UserController implements IUserController {
       return err.message;
     }
   }
+
+  async ticketCancel(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<{}> {
+    try {
+      let canceledTicket = await userService.ticketCancel(req, res);
+      return res.json(canceledTicket);
+    } catch (err) {
+      return err.message;
+    }
+  }
 }

@@ -201,6 +201,39 @@ const paths = {
       produces: ["application/json"],
     },
   },
+  "/user/ticketCancel": {
+    delete: {
+      summary: "Remove bought ticket from the database",
+      tags: ["User"],
+      parameters: [
+        {
+          name: "jwt",
+          in: "header",
+          description: "JWT",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "id_ticket",
+          in: "body",
+          description: "ticket ID",
+          required: true,
+          schema: {
+            $ref: "#/definitions/ticketCancel",
+          },
+        },
+      ],
+      responses: {
+        "200": {
+          description: "Ticket has been deleted",
+          schema: {
+            $ref: "#/responses/ticketCancel",
+          },
+        },
+      },
+      produces: ["application/json"],
+    },
+  },
 };
 
 const definitions = {
@@ -248,6 +281,11 @@ const definitions = {
     example: {
       id_ticket: 7,
       credit_card_no: 1111111111111111,
+    },
+  },
+  ticketCancel: {
+    example: {
+      id_purchase: 28801477,
     },
   },
 };

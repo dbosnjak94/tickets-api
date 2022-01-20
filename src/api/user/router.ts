@@ -4,7 +4,7 @@ import express from "express";
 import { IUserController } from "./interfaces";
 import { UserController } from "./controllers";
 import { authenticate } from "../../utils/jwtAuthentication.utils";
-import { creditCardValidatorUtil } from "../../utils/creaditCardValidator.util";
+import { creditCardValidatorUtil } from "../../utils/creditCardValidator.util";
 
 const router = express.Router();
 
@@ -21,5 +21,6 @@ router.post(
   creditCardValidatorUtil,
   userController.ticketPurchase
 );
+router.delete("/ticketCancel", authenticate, userController.ticketCancel);
 
 export default router;

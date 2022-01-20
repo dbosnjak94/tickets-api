@@ -5,6 +5,7 @@ import { StatusCodes } from "../../statusCodes/statusCodes";
 import { ListOfTicketInfosDto, PurchasedTicketDto } from "../../dto/user.dto";
 import { ITicketRepository } from "../ticket/interfaces";
 import { IPurchasedTicket } from "../../database/models/ticket.model";
+import { timeValidatorUtil } from "../../utils/timeValidator.utils";
 
 export class UserService implements IUserService {
   constructor(
@@ -67,6 +68,46 @@ export class UserService implements IUserService {
         status: StatusCodes.OK,
         data: purchasedTicket,
         message: `Ticket has been purchased`,
+      };
+    } catch (err) {
+      return {
+        status: StatusCodes.SERVER_ERROR,
+        message: err.message,
+      };
+    }
+  }
+
+  async ticketCancel(req: Request, res: Response): Promise<PurchasedTicketDto> {
+    try {
+      let { id_purchase } = req.body;
+      console.log(id_purchase);
+
+      let purchasedTicket =
+        await this.userRepository.getPurchasedTicketByPurchaseID(id_purchase);
+
+      let cancellation_time_approval = await timeValidatorUtil(
+        purchasedTicket[0].time_of_departure
+      );
+
+      if (cancellation_time_approval === false) {
+        return {
+          status: StatusCodes.FORBIDDEN,
+          message: `Ticket number ${id_purchase} cannot be canceled becuase there is less than one hour before departure`,
+        };
+      }
+
+      let canceledTicket = await this.userRepository.ticketCancel(id_purchase);
+
+      if (canceledTicket === false) {
+        return {
+          status: StatusCodes.UNPROCESSABLE,
+          message: `Ticket number ${id_purchase} cannot be canceled. Contact our support team.`,
+        };
+      }
+
+      return {
+        status: StatusCodes.OK,
+        message: `Ticket No. ${id_purchase} has been canceled`,
       };
     } catch (err) {
       return {
