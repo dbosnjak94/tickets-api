@@ -46,7 +46,7 @@ DB_SALT_ROUNDS=10
 
 ###Starting server-side
 ```
-$ cd server
+$ cd ticket-api
 $ npm install
 $ npm run start
 ```
