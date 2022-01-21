@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import { ITicketRepository, ITicketService } from './interfaces'
 import { ListOfTicketsDto, TicketDto } from '../../dto/ticket.dto'
-import { ITicket } from '../../database/models/ticket.model'
 import { StatusCodes } from '../../statusCodes/statusCodes'
 
 export class TicketService implements ITicketService {
@@ -128,18 +127,4 @@ export class TicketService implements ITicketService {
       }
     }
   }
-
-  // async getTicketByID(req: Request, res: Response): Promise<ITicket> {
-  //   try {
-  //     let { id_ticket } = req.body;
-  //     let ticket = await this.ticketRepository.getTicketByID(id_ticket);
-  //     return {
-  //       listOfTickets,
-  //     };
-  //   } catch (err) {
-  //     return {
-  //       message: err.message,
-  //     };
-  //   }
-  // }
 }

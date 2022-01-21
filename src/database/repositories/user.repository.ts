@@ -1,7 +1,7 @@
 import { connection } from '../index'
 import { ITicketInfo, IUser } from '../models/user.model'
 import { IUserRepository } from '../../api/user/interfaces'
-import { IPurchasedTicket, ITicket } from '../models/ticket.model'
+import { IPurchasedTicket } from '../models/ticket.model'
 
 export class UserRepository implements IUserRepository {
   async getAllUserTickets(id_user): Promise<ITicketInfo[]> {

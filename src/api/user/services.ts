@@ -1,10 +1,8 @@
 import { Request, Response } from 'express'
 import { IUserRepository, IUserService } from './interfaces'
-import { ListOfTicketsDto, TicketDto } from '../../dto/ticket.dto'
 import { StatusCodes } from '../../statusCodes/statusCodes'
 import { ListOfTicketInfosDto, PurchasedTicketDto } from '../../dto/user.dto'
 import { ITicketRepository } from '../ticket/interfaces'
-import { IPurchasedTicket } from '../../database/models/ticket.model'
 import { timeValidatorUtil } from '../../utils/timeValidator.utils'
 
 export class UserService implements IUserService {
@@ -42,22 +40,17 @@ export class UserService implements IUserService {
 
       let getAllPurchasedTickets = await this.ticketRepository.getAllPurchasedTickets(id_ticket)
 
-      //console.log(getAllPurchasedTickets[0])
-
       if (getAllPurchasedTickets[0] === undefined) {
         seat_number = 1
       } else {
         seat_number = getAllPurchasedTickets[getAllPurchasedTickets.length - 1].seat_number + 1
       }
 
-      console.log(ticket[0].available_number_of_tickets, seat_number)
-
       if (ticket[0].available_number_of_tickets < seat_number) {
         return {
           status: StatusCodes.UNPROCESSABLE,
           message: `'There are no more available tickets for current flight'`,
         }
-        console.log('There are no more available tickets for current flight')
       }
 
       let purchasedTicket = await this.userRepository.ticketPurchase({
@@ -66,8 +59,6 @@ export class UserService implements IUserService {
         id_purchase,
         seat_number,
       })
-
-      console.log(purchasedTicket)
 
       return {
         status: StatusCodes.OK,

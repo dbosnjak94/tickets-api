@@ -23,7 +23,7 @@ export class AuthService implements IAuthService {
         }
       }
 
-      user = await this.authRepository.createUser({
+      await this.authRepository.createUser({
         first_name,
         last_name,
         email,

@@ -12,7 +12,6 @@ export interface ITicketController {
 
 export interface ITicketService {
   getListOfAllTickets(req: Request, res: Response): Promise<ListOfTicketsDto>
-  // getTicketByID(req: Request, res: Response): Promise<ITicket>;
   addTicket(req: Request, res: Response): Promise<TicketDto>
   editTicket(req: Request, res: Response): Promise<TicketDto>
   deleteTicket(req: Request, res: Response): Promise<TicketDto>

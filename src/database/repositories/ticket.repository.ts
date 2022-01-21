@@ -63,8 +63,6 @@ export class TicketRepository implements ITicketRepository {
       ]
     )
 
-    console.log(result[0].affectedRows)
-
     return result[0].affectedRows === 0 ? false : true
   }
 
@@ -87,15 +85,6 @@ export class TicketRepository implements ITicketRepository {
       `SELECT * FROM user_ticket WHERE id_ticket = ?`,
       id_ticket
     )
-    console.log(result[0])
     return result[0]
   }
-
-  // async getTicketByID(id_ticket): Promise<ITicket> {
-  //   const result = await connection.query(
-  //     `SELECT * FROM user WHERE id_ticket = ?;`,
-  //     id_ticket
-  //   );
-  //   return result;
-  // }
 }

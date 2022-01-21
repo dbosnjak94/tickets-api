@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
-import { ListOfTicketsDto, TicketDto } from '../../dto/ticket.dto'
-import { IPurchasedTicket, ITicket, IUserTicket } from '../../database/models/ticket.model'
+import { IPurchasedTicket, IUserTicket } from '../../database/models/ticket.model'
 import { ITicketInfo, IUser } from '../../database/models/user.model'
 import { ListOfTicketInfosDto, PurchasedTicketDto } from '../../dto/user.dto'
 
