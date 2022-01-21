@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
-import { IUser } from "../database/models/user.model";
+import jwt from 'jsonwebtoken'
+import { IUser } from '../database/models/user.model'
 
 export const generateToken = (user: IUser) => {
   try {
-    const secret = "SecretKey";
+    const secret = 'SecretKey'
     const token = jwt.sign(
       {
         data: {
@@ -11,9 +11,9 @@ export const generateToken = (user: IUser) => {
         },
       },
       secret
-    );
-    return token;
+    )
+    return token
   } catch (err) {
-    throw { message: "Failed to create token" };
+    throw { message: 'Failed to create token' }
   }
-};
+}

@@ -1,16 +1,16 @@
-"use strict";
+'use strict'
 
-import express from "express";
-import { ITicketController } from "./interfaces";
-import { TicketController } from "./controllers";
+import express from 'express'
+import { ITicketController } from './interfaces'
+import { TicketController } from './controllers'
 
-const router = express.Router();
+const router = express.Router()
 
-const ticketController: ITicketController = new TicketController();
+const ticketController: ITicketController = new TicketController()
 
-router.get("/getListOfAllTickets", ticketController.getListOfAllTickets);
-router.post("/addTicket", ticketController.addTicket);
-router.put("/editTicket", ticketController.editTicket);
-router.delete("/deleteTicket", ticketController.deleteTicket);
+router.get('/getListOfAllTickets', ticketController.getListOfAllTickets)
+router.post('/addTicket', ticketController.addTicket)
+router.put('/editTicket', ticketController.editTicket)
+router.delete('/deleteTicket', ticketController.deleteTicket)
 
-export default router;
+export default router

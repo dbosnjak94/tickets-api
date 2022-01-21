@@ -1,7 +1,7 @@
-"use strict";
+'use strict'
 
-import { config } from "../config/index";
-import mysql from "mysql2/promise";
+import { config } from '../config/index'
+import mysql from 'mysql2/promise'
 
 const connection = mysql.createPool({
   host: config.host as string,
@@ -13,6 +13,6 @@ const connection = mysql.createPool({
   queueLimit: 1500,
   multipleStatements: true,
   dateStrings: true,
-});
+})
 
-export { connection };
+export { connection }

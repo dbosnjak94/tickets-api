@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import { ITicketRepository, ITicketService } from "./interfaces";
-import { ListOfTicketsDto, TicketDto } from "../../dto/ticket.dto";
-import { ITicket } from "../../database/models/ticket.model";
-import { StatusCodes } from "../../statusCodes/statusCodes";
+import { Request, Response } from 'express'
+import { ITicketRepository, ITicketService } from './interfaces'
+import { ListOfTicketsDto, TicketDto } from '../../dto/ticket.dto'
+import { ITicket } from '../../database/models/ticket.model'
+import { StatusCodes } from '../../statusCodes/statusCodes'
 
 export class TicketService implements ITicketService {
   constructor(private ticketRepository: ITicketRepository) {}
@@ -17,7 +17,7 @@ export class TicketService implements ITicketService {
         time_of_arrival,
         price,
         available_number_of_tickets,
-      } = req.body;
+      } = req.body
 
       let ticket = await this.ticketRepository.addTicket({
         id_vendor,
@@ -27,47 +27,47 @@ export class TicketService implements ITicketService {
         time_of_arrival,
         price,
         available_number_of_tickets,
-      });
+      })
 
       if (ticket === false) {
         return {
           status: StatusCodes.UNPROCESSABLE,
-          message: "Ticket cannot be added to the database",
-        };
+          message: 'Ticket cannot be added to the database',
+        }
       }
       return {
         status: StatusCodes.OK,
-        message: "New ticket has been created.",
-      };
+        message: 'New ticket has been created.',
+      }
     } catch (err) {
       return {
         status: StatusCodes.SERVER_ERROR,
         message: err.message,
-      };
+      }
     }
   }
 
   async deleteTicket(req: Request, res: Response): Promise<TicketDto> {
     try {
-      let { id_ticket } = req.body;
+      let { id_ticket } = req.body
 
-      let deletedTicket = await this.ticketRepository.deleteTicket(id_ticket);
+      let deletedTicket = await this.ticketRepository.deleteTicket(id_ticket)
 
       if (deletedTicket === false) {
         return {
           status: StatusCodes.UNPROCESSABLE,
-          message: "Ticket cannot be deleted",
-        };
+          message: 'Ticket cannot be deleted',
+        }
       }
       return {
         status: StatusCodes.OK,
-        message: "Ticket has been deleted",
-      };
+        message: 'Ticket has been deleted',
+      }
     } catch (err) {
       return {
         status: StatusCodes.SERVER_ERROR,
         message: err.message,
-      };
+      }
     }
   }
 
@@ -82,7 +82,7 @@ export class TicketService implements ITicketService {
         price,
         available_number_of_tickets,
         id_ticket,
-      } = req.body;
+      } = req.body
 
       let ticket = await this.ticketRepository.editTicket({
         id_vendor,
@@ -93,42 +93,39 @@ export class TicketService implements ITicketService {
         price,
         available_number_of_tickets,
         id_ticket,
-      });
+      })
 
       if (ticket === false) {
         return {
           status: StatusCodes.UNPROCESSABLE,
-          message: "Ticket info cannot be edited.",
-        };
+          message: 'Ticket info cannot be edited.',
+        }
       }
       return {
         status: StatusCodes.OK,
-        message: "Ticket info has been edited.",
-      };
+        message: 'Ticket info has been edited.',
+      }
     } catch (err) {
       return {
         status: StatusCodes.SERVER_ERROR,
         message: err.message,
-      };
+      }
     }
   }
 
-  async getListOfAllTickets(
-    req: Request,
-    res: Response
-  ): Promise<ListOfTicketsDto> {
+  async getListOfAllTickets(req: Request, res: Response): Promise<ListOfTicketsDto> {
     try {
-      let listOfTickets = await this.ticketRepository.getListOfAllTickets();
+      let listOfTickets = await this.ticketRepository.getListOfAllTickets()
       return {
         status: StatusCodes.OK,
         data: listOfTickets,
-        message: "List of all available tickets",
-      };
+        message: 'List of all available tickets',
+      }
     } catch (err) {
       return {
         status: StatusCodes.SERVER_ERROR,
         message: err.message,
-      };
+      }
     }
   }
 

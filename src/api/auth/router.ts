@@ -1,14 +1,13 @@
-"use strict";
+'use strict'
 
-import express from "express";
-import { IAuthController } from "./interfaces";
-import { AuthController } from "./controllers";
+import express from 'express'
+import { IAuthController } from './interfaces'
+import { AuthController } from './controllers'
 
-const router = express.Router();
+const router = express.Router()
+const authController: IAuthController = new AuthController()
 
-const authController: IAuthController = new AuthController();
+router.post('/signUp', authController.signUp)
+router.post('/signin', authController.signIn)
 
-router.post("/signUp", authController.signUp);
-router.post("/signin", authController.signIn);
-
-export default router;
+export default router

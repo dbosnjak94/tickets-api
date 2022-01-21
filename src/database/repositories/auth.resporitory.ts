@@ -10,9 +10,6 @@ export class AuthRepository implements IAuthRepository {
                     VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP());`,
       [user.first_name, user.last_name, user.email, user.password]
     )
-
-    // const result: any[] = await connection.query(`SELECT * FROM user WHERE email = ?`, user.email);
-    // return result.length ? result[0] : false;
   }
 
   async getUserByEmail(email: string): Promise<IUser> {
